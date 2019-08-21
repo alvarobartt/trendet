@@ -30,7 +30,7 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
     Returns:
         :obj:`pandas.DataFrame`:
             The function returns a :obj:`pandas.DataFrame` which contains the retrieved historical data from Investing
-            using investpy, with a new column which identifies every trend found on the market between two dates
+            using `investpy`, with a new column which identifies every trend found on the market between two dates
             identifying when did the trend started and when did it end. So the additional column contains labeled date
             ranges.
     Raises:

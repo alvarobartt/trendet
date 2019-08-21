@@ -1,0 +1,2 @@
+investpy==0.8.8
+setuptools==41.2.0
