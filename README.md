@@ -17,7 +17,7 @@
 **trendet** is a Python package to detect trends on the market so to analyze its behaviour. So on, this package
 has been created to support [investpy](https://github.com/alvarob96/investpy) features when it comes to data retrieval
 from different financial products such as stocks/equities, funds or ETFs. **trendet** is intended to be used combined
-with **investpy**, but also with every OHLC `pandas.DataFrame`. 
+with **investpy**, but also with every *OHLC* `pandas.DataFrame`. 
 
 ## Installation
 
@@ -28,6 +28,37 @@ In order to get this package working you will need to install it using pip by ty
 Or just install the current release or a specific release version such as:
 
 ``$ python -m pip install trendet==0.1``
+
+## Usage
+
+````python
+import trendet
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set(style='darkgrid')
+
+
+df = trendet.identify_trends(equity='bbva',
+                             from_date='01/01/2018',
+                             to_date='01/01/2019',
+                             window_size=5,
+                             trend_limit=3,
+                             labels=['A', 'B', 'C'])
+
+df.reset_index(inplace=True)
+
+with plt.style.context('paper'):
+    plt.figure(figsize=(20, 10))
+
+    ax = sns.lineplot(x=df['Date'], y=df['Close'])
+
+    for label in ['A', 'B', 'C']:
+        sns.lineplot(x=df[df['Trend'] == label]['Date'], y=df[df['Trend'] == label]['Close'], color='red')
+        ax.axvspan(df[df['Trend'] == label]['Date'].iloc[0], df[df['Trend'] == label]['Date'].iloc[-1], alpha=0.1, color='red')
+    
+    plt.show()
+````
 
 ## Contribute
 
@@ -41,7 +72,11 @@ new issues if needed or navigate through them in order to solve them or contribu
 
 This package has been created so to identify market trends based on stock historical data retrieved via 
 [investpy](https://github.com/alvarob96/investpy) so to determine which trends have been prevailing on the market
-based on a single stock/equity OHLC values.
+based on a single stock/equity *OHLC* values.
 
 Conclude that this is the result of a research project, so this package has been developed with research purposes and
 no profit is intended.
+
+Plots have been generated with both [matplotlib](https://pypi.org/project/matplotlib/) and 
+[seaborn](https://pypi.org/project/seaborn/), using @Dih5 [paper-theme](https://github.com/Dih5/paper-themes) for 
+scientific publications, a matplotlib style which I highly recommend.
