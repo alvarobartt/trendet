@@ -1,2 +1,1 @@
-# trendet
-[Development] trendet is Python tool for trend detection on time series
+# trendet - Python package for trend detection on stock time series
