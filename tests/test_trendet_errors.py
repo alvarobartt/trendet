@@ -75,7 +75,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
-            'from_date': '01/01-2018',
+            'from_date': '01/01/2018',
             'to_date': '_01*01/2019',
             'window_size': 5,
             'trend_limit': 3,

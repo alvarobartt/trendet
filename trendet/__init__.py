@@ -37,7 +37,7 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
         ValueError: argument error.
     """
 
-    if not isinstance(equity, str):
+    if equity and not isinstance(equity, str):
         raise ValueError("equity argument needs to be a str.")
 
     if not equity:
@@ -71,8 +71,8 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
     if isinstance(trend_limit, int) and trend_limit < 1:
         raise ValueError('trend_limit must be an `int` equal or higher than 1!')
 
-    if labels is not None and isinstance(labels, list):
-        if len(labels) != len(trend_limit):
+    if labels is not None and isinstance(labels, list) and isinstance(trend_limit, int):
+        if len(labels) != trend_limit:
             raise ValueError('if labels is not None and a `list`, it must have the same length as the trend_limit!')
 
     if labels is not None and not isinstance(labels, list):
