@@ -6,6 +6,7 @@
 [![Build Status](https://dev.azure.com/alvarob96/alvarob96/_apis/build/status/alvarob96.trendet?branchName=master)](https://dev.azure.com/alvarob96/alvarob96/_build?definitionId=1&_a=summary)
 [![Build Status](https://img.shields.io/travis/alvarob96/trendet/master.svg?label=Travis%20CI&logo=travis&logoColor=white)](https://travis-ci.org/alvarob96/trendet)
 [![Documentation Status](https://readthedocs.org/projects/trendet/badge/?version=latest)](https://trendet.readthedocs.io/)
+[![codecov](https://codecov.io/gh/alvarob96/trendet/branch/master/graph/badge.svg)](https://codecov.io/gh/alvarob96/trendet)
 [![Downloads](https://img.shields.io/pypi/dm/trendet.svg?style=flat)](https://pypistats.org/packages/trendet)
 
 <p align="center">
@@ -16,8 +17,8 @@
 
 **trendet** is a Python package to detect trends on the market so to analyze its behaviour. So on, this package
 has been created to support [investpy](https://github.com/alvarob96/investpy) features when it comes to data retrieval
-from different financial products such as stocks/equities, funds or ETFs. **trendet** is intended to be used combined
-with **investpy**, but also with every *OHLC* `pandas.DataFrame`. 
+from different financial products such as stocks/equities, funds or ETFs; and it is intended to be combined with it, 
+but also with every `pandas.DataFrame`, formatted as OHLC. 
 
 ## Installation
 
@@ -72,11 +73,11 @@ new issues if needed or navigate through them in order to solve them or contribu
 
 This package has been created so to identify market trends based on stock historical data retrieved via 
 [investpy](https://github.com/alvarob96/investpy) so to determine which trends have been prevailing on the market
-based on a single stock/equity *OHLC* values.
+based on a single stock/equity OHLC values.
 
 Conclude that this is the result of a research project, so this package has been developed with research purposes and
 no profit is intended.
 
 Plots have been generated with both [matplotlib](https://pypi.org/project/matplotlib/) and 
-[seaborn](https://pypi.org/project/seaborn/), using @Dih5 [paper-theme](https://github.com/Dih5/paper-themes) for 
-scientific publications, a matplotlib style which I highly recommend.
+[seaborn](https://pypi.org/project/seaborn/), using [@Dih5](https://github.com/Dih5) 
+[paper-themes](https://github.com/Dih5/paper-themes) for scientific publications highly recommended.

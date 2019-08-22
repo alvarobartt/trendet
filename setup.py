@@ -18,7 +18,7 @@ setup(
     license='MIT License',
     author='Alvaro Bartolome',
     author_email='alvarob96@usal.es',
-    description='trendet - Python package for trend detection on stock time series',
+    description='trendet - is a Python package for trend detection on stock time series data',
     long_description=readme(),
     long_description_content_type='text/markdown',
     install_requires=[
