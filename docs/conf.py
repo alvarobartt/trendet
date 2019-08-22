@@ -52,6 +52,24 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 #
 html_theme = 'alabaster'
 
+html_sidebars = {
+    "**": [
+        'about.html',
+        'globaltoc.html',
+        'searchbox.html',
+    ]
+}
+
+html_theme_options = {
+    'description': 'A stock trend detector.',
+    'github_user': 'alvarob96',
+    'github_repo': 'trendet',
+    'github_button': True,
+    'github_type': 'star',
+    'github_count': True,
+    'github_banner': True,
+}
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
