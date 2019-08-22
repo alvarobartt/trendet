@@ -18,10 +18,26 @@ def test_errors():
 
     params = [
         {
-            'equity': 'error',
+            'equity': ['error'],
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 1,
+            'trend_limit': 3,
+            'labels': None,
+        },
+        {
+            'equity': None,
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 1,
+            'trend_limit': 3,
+            'labels': None,
+        },
+        {
+            'equity': 'error',
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
             'trend_limit': 3,
             'labels': None,
         },
@@ -45,6 +61,14 @@ def test_errors():
             'equity': 'bbva',
             'from_date': '01/01/2019',
             'to_date': '01/01/2018',
+            'window_size': 5,
+            'trend_limit': 3,
+            'labels': None,
+        },
+        {
+            'equity': 'bbva',
+            'from_date': '01/01-2018',
+            'to_date': '01/01/2019',
             'window_size': 5,
             'trend_limit': 3,
             'labels': None,
@@ -117,9 +141,17 @@ def test_errors():
             'equity': 'bbva',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
-            'window_size': 1,
+            'window_size': 5,
             'trend_limit': 3,
             'labels': ['a', 'b'],
+        },
+        {
+            'equity': 'bbva',
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 3,
+            'labels': 'error',
         },
     ]
 
