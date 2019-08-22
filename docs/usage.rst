@@ -5,10 +5,11 @@ As **trendet** is intended to be combined with **investpy**, the main functional
 detect trends on stock time series data so to analyse the market and which behaviour does it have
 in certain date ranges.
 
-In the example presented below, the ``identify_trends`` function will be used to detect 3 bearish trends
+In the example presented below, the ``identify_trends`` function will be used to detect 3 bearish/bullish trends
 with a time window above 5 days, which implies that every bearish (decreasing) trend with a longer
 duration than 5 days will be identified and so on added to a ``pandas.DataFrame`` which already contains
-OHLC values, in a new column called `Trend` which will be labeled.
+OHLC values, in new columns called `Up Trend` and `Down Trend` which will be labeled as specified, with letters from A
+to Z by default.
 
 .. code-block:: python
 
@@ -16,8 +17,8 @@ OHLC values, in a new column called `Trend` which will be labeled.
 
     import matplotlib.pyplot as plt
     import seaborn as sns
-    sns.set(style='darkgrid')
 
+    sns.set(style='darkgrid')
 
     df = trendet.identify_trends(equity='bbva',
                                  from_date='01/01/2018',
@@ -33,9 +34,26 @@ OHLC values, in a new column called `Trend` which will be labeled.
 
         ax = sns.lineplot(x=df['Date'], y=df['Close'])
 
+        values = list()
+
+        value = {
+            'trend': 'Up Trend',
+            'color': 'green',
+        }
+
+        values.append(value)
+
+        value = {
+            'trend': 'Down Trend',
+            'color': 'red',
+        }
+
+        values.append(value)
+
         for label in ['A', 'B', 'C']:
-            sns.lineplot(x=df[df['Trend'] == label]['Date'], y=df[df['Trend'] == label]['Close'], color='red')
-            ax.axvspan(df[df['Trend'] == label]['Date'].iloc[0], df[df['Trend'] == label]['Date'].iloc[-1], alpha=0.1, color='red')
+            for value in values:
+                sns.lineplot(x=df[df[value['trend']] == label]['Date'], y=df[df[value['trend']] == label]['Close'], color=value['color'])
+                ax.axvspan(df[df[value['trend']] == label]['Date'].iloc[0], df[df[value['trend']] == label]['Date'].iloc[-1], alpha=0.2, color=value['color'])
 
         plt.show()
 

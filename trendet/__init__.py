@@ -4,9 +4,11 @@
 # See LICENSE for details.
 
 __author__ = 'Alvaro Bartolome @ alvarob96 on GitHub'
-__version__ = '0.1'
+__version__ = '0.2'
 
 from investpy import get_historical_data
+
+import numpy as np
 
 from statistics import mean
 import datetime
@@ -91,45 +93,62 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
     except:
         raise RuntimeError('investpy function call failed!')
 
-    limit = None
-    values = list()
+    objs = list()
 
-    trends = list()
+    up_trend = {
+        'name': 'Up Trend',
+        'element': np.negative(df['Close'])
+    }
 
-    for index, value in enumerate(df['Close'], 0):
-        if limit and limit > value:
-            values.append(value)
-            limit = mean(values)
-        elif limit and limit < value:
-            if len(values) > window_size:
-                min_value = min(values)
+    objs.append(up_trend)
 
-                for counter, item in enumerate(values, 0):
-                    if item == min_value:
+    down_trend = {
+        'name': 'Down Trend',
+        'element': df['Close']
+    }
+
+    objs.append(down_trend)
+
+    for obj in objs:
+        limit = None
+        values = list()
+
+        trends = list()
+
+        for index, value in enumerate(obj['element'], 0):
+            if limit and limit > value:
+                values.append(value)
+                limit = mean(values)
+            elif limit and limit < value:
+                if len(values) > window_size:
+                    min_value = min(values)
+
+                    for counter, item in enumerate(values, 0):
+                        if item == min_value:
+                            break
+
+                    to_trend = from_trend + counter
+
+                    trend = {
+                        'from': df.index.tolist()[from_trend],
+                        'to': df.index.tolist()[to_trend],
+                    }
+
+                    trends.append(trend)
+
+                    if len(trends) >= trend_limit:
                         break
 
-                to_trend = from_trend + counter
+                limit = None
+                values = list()
+            else:
+                from_trend = index
 
-                obj = {
-                    'from': df.index.tolist()[from_trend],
-                    'to': df.index.tolist()[to_trend],
-                }
+                values.append(value)
+                limit = mean(values)
 
-                trends.append(obj)
-
-                if len(trends) >= trend_limit:
-                    break
-
-            limit = None
-            values = list()
-        else:
-            from_trend = index
-
-            values.append(value)
-            limit = mean(values)
-
-    for trend, label in zip(trends, labels):
-        for index, row in df[trend['from']:trend['to']].iterrows():
-            df.loc[index, 'Trend'] = label
+        for trend, label in zip(trends, labels):
+            for index, row in df[trend['from']:trend['to']].iterrows():
+                df.loc[index, obj['name']] = label
 
     return df
