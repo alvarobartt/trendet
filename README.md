@@ -28,7 +28,7 @@ In order to get this package working you will need to install it using pip by ty
 
 Or just install the current release or a specific release version such as:
 
-``$ python -m pip install trendet==0.2``
+``$ python -m pip install trendet==0.3``
 
 ## Usage
 
@@ -87,6 +87,10 @@ with plt.style.context('paper'):
 
     plt.show()
 ````
+
+Further usage insights can be found on the [docs](https://trendet.readthedocs.io/) or on the following 
+[gist](https://gist.github.com/alvarob96/98f94dcfec59f78a16ad2edbf464ce75#file-identify_all_trends-py). Anyways, 
+feel free to create your own scripts on how you use **trendet** or how can it be used in order to improve its features.
 
 ## Contribute
 

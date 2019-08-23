@@ -61,3 +61,61 @@ So on, the resulting plot which will be outputted from the previous block of cod
 
 .. image:: https://raw.githubusercontent.com/alvarob96/trendet/master/docs/trendet_example.png
     :align: center
+
+Additionally **trendet** allows the user to identify/detect all the up and down trends on the market
+via the function `identify_all_trends` which has been included in 0.3 release. So on, the sample code for
+its usage is as follows:
+
+.. code-block:: python
+
+    import trendet
+
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    sns.set(style='darkgrid')
+
+    df = identify_all_trends(equity='bbva',
+                             from_date='01/01/2018',
+                             to_date='01/01/2019',
+                             window_size=5)
+
+    df.reset_index(inplace=True)
+
+    with plt.style.context('paper'):
+        plt.figure(figsize=(20, 10))
+
+        ax = sns.lineplot(x=df['Date'], y=df['Close'])
+
+        labels = df['Up Trend'].dropna().unique().tolist()
+
+        for label in labels:
+            sns.lineplot(x=df[df['Up Trend'] == label]['Date'],
+                         y=df[df['Up Trend'] == label]['Close'],
+                         color='green')
+
+            ax.axvspan(df[df['Up Trend'] == label]['Date'].iloc[0],
+                       df[df['Up Trend'] == label]['Date'].iloc[-1],
+                       alpha=0.2,
+                       color='green')
+
+        labels = df['Down Trend'].dropna().unique().tolist()
+
+        for label in labels:
+            sns.lineplot(x=df[df['Down Trend'] == label]['Date'],
+                         y=df[df['Down Trend'] == label]['Close'],
+                         color='red')
+
+            ax.axvspan(df[df['Down Trend'] == label]['Date'].iloc[0],
+                       df[df['Down Trend'] == label]['Date'].iloc[-1],
+                       alpha=0.2,
+                       color='red')
+
+        plt.show()
+
+Which as described before, plots all the trends identified on the specified stock time series
+data removing overlapped trends keeping just the longer trend as minor trends are ignored. So the
+output of the previous block of code on **trendet** usage is the following plot:
+
+.. image:: https://raw.githubusercontent.com/alvarob96/trendet/master/docs/trendet_example_all.png
+    :align: center

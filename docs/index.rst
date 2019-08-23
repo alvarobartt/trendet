@@ -16,6 +16,7 @@ Welcome to trendet's documentation!
    introduction.rst
    installation.rst
    usage.rst
+   api.rst
    contribute.rst
    disclaimer.rst
 

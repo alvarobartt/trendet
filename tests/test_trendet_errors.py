@@ -13,9 +13,6 @@ def test_errors():
     This function raises trendet errors to improve coverage
     """
 
-    print(trendet.__author__)
-    print(trendet.__version__)
-
     params = [
         {
             'equity': ['error'],
@@ -164,7 +161,15 @@ def test_errors():
                                     trend_limit=param['trend_limit'],
                                     labels=param['labels'])
         except:
-            continue
+            pass
+
+        try:
+            trendet.identify_all_trends(equity=param['equity'],
+                                        from_date=param['from_date'],
+                                        to_date=param['to_date'],
+                                        window_size=param['window_size'])
+        except:
+            pass
 
 
 if __name__ == '__main__':
