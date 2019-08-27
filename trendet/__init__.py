@@ -156,12 +156,7 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
         flag = True
 
         for down in results['Down Trend']:
-            if down['from'] < up['from'] < down['to']:
-                if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
-                    flag = True
-                else:
-                    flag = False
-            elif down['from'] < up['to'] < down['to']:
+            if down['from'] < up['from'] < down['to'] or down['from'] < up['to'] < down['to']:
                 if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
                     flag = True
                 else:
@@ -171,9 +166,6 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
 
         if flag is True:
             up_trends.append(up)
-
-    if len(up_trends) < 1:
-        raise IndexError('no up_trends identified')
 
     if labels is None:
         up_labels = [letter for letter in string.ascii_uppercase[:len(up_trends)]]
@@ -191,12 +183,7 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
         flag = True
 
         for up in results['Up Trend']:
-            if up['from'] < down['from'] < up['to']:
-                if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
-                    flag = True
-                else:
-                    flag = False
-            elif up['from'] < down['to'] < up['to']:
+            if up['from'] < down['from'] < up['to'] or up['from'] < down['to'] < up['to']:
                 if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
                     flag = True
                 else:
@@ -206,9 +193,6 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
 
         if flag is True:
             down_trends.append(down)
-
-    if len(down_trends) < 1:
-        raise IndexError('no down_trends identified')
 
     if labels is None:
         down_labels = [letter for letter in string.ascii_uppercase[:len(down_trends)]]
@@ -349,12 +333,7 @@ def identify_all_trends(equity, from_date, to_date, window_size=5):
         flag = True
 
         for down in results['Down Trend']:
-            if down['from'] < up['from'] < down['to']:
-                if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
-                    flag = True
-                else:
-                    flag = False
-            elif down['from'] < up['to'] < down['to']:
+            if down['from'] < up['from'] < down['to'] or down['from'] < up['to'] < down['to']:
                 if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
                     flag = True
                 else:
@@ -375,12 +354,7 @@ def identify_all_trends(equity, from_date, to_date, window_size=5):
         flag = True
 
         for up in results['Up Trend']:
-            if up['from'] < down['from'] < up['to']:
-                if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
-                    flag = True
-                else:
-                    flag = False
-            elif up['from'] < down['to'] < up['to']:
+            if up['from'] < down['from'] < up['to'] or up['from'] < down['to'] < up['to']:
                 if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
                     flag = True
                 else:

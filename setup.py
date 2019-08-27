@@ -22,8 +22,9 @@ setup(
     long_description=readme(),
     long_description_content_type='text/markdown',
     install_requires=[
-        'investpy==0.8.8',
-        'setuptools==41.2.0'
+        'investpy>=0.8.8',
+        'numpy>=1.17.0',
+        'setuptools>=41.2.0'
     ],
     data_files=[],
     include_package_data=True,

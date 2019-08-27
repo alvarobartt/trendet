@@ -33,6 +33,17 @@ def test_trendet():
 
         params.append(obj)
 
+    obj = {
+        'equity': 'bbva',
+        'from_date': '01/01/2018',
+        'to_date': '01/01/2019',
+        'window_size': 5,
+        'trend_limit': 2,
+        'labels': ['A', 'B'],
+    }
+
+    params.append(obj)
+
     for param in params:
         trendet.identify_trends(equity=param['equity'],
                                 from_date=param['from_date'],
