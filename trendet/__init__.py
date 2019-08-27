@@ -172,9 +172,6 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
     else:
         up_labels = labels
 
-        if len(up_labels) != len(up_trends[:trend_limit]):
-            raise IndexError('length of up_labels do not match identified trends length!')
-
     for up_trend, up_label in zip(up_trends, up_labels):
         for index, row in df[up_trend['from']:up_trend['to']].iterrows():
             df.loc[index, 'Up Trend'] = up_label
@@ -198,9 +195,6 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
         down_labels = [letter for letter in string.ascii_uppercase[:len(down_trends)]]
     else:
         down_labels = labels
-
-        if len(down_labels) != len(down_trends[:trend_limit]):
-            raise IndexError('length of down_labels do not match identified trends length!')
 
     for down_trend, down_label in zip(down_trends, down_labels):
         for index, row in df[down_trend['from']:down_trend['to']].iterrows():
