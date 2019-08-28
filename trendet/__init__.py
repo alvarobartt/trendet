@@ -4,7 +4,7 @@
 # See LICENSE for details.
 
 __author__ = 'Alvaro Bartolome @ alvarob96 on GitHub'
-__version__ = '0.3'
+__version__ = '0.4'
 
 from investpy import get_historical_data
 
@@ -15,7 +15,7 @@ import datetime
 import string
 
 
-def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, labels=None):
+def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, labels=None, identify='both'):
     """
     This function retrieves historical data from the introduced `equity` between two dates from Investing via investpy;
     and that data is later going to be analysed in order to detect/identify trends over a certain date range. A trend
@@ -31,6 +31,8 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
         window_size (:obj:`window`, optional): number of days from where market behaviour is considered a trend.
         trend_limit (:obj:`int`, optional): maximum number of trends to identify
         labels (:obj:`list`, optional): name of the labels for every identified trend.
+        identify (:obj:`str`, optional):
+            which trends does the user wants to be identified, it can either be 'both', 'up' or 'down'.
 
     Returns:
         :obj:`pandas.DataFrame`:
@@ -84,6 +86,12 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
     if labels is not None and not isinstance(labels, list):
         raise ValueError('labels is neither None or a `list`!')
 
+    if not isinstance(identify, str):
+        raise ValueError('identify should be a `str` contained in [both, up, down]!')
+
+    if isinstance(identify, str) and identify not in ['both', 'up', 'down']:
+        raise ValueError('identify should be a `str` contained in [both, up, down]!')
+
     try:
         df = get_historical_data(equity=str(equity),
                                  from_date=from_date,
@@ -101,14 +109,18 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
         'element': np.negative(df['Close'])
     }
 
-    objs.append(up_trend)
-
     down_trend = {
         'name': 'Down Trend',
         'element': df['Close']
     }
 
-    objs.append(down_trend)
+    if identify == 'both':
+        objs.append(up_trend)
+        objs.append(down_trend)
+    elif identify == 'up':
+        objs.append(up_trend)
+    elif identify == 'down':
+        objs.append(down_trend)
 
     results = dict()
 
@@ -149,61 +161,89 @@ def identify_trends(equity, from_date, to_date, window_size=5, trend_limit=3, la
 
         results[obj['name']] = trends
 
-    up_trends = list()
-    down_trends = list()
-
-    for up in results['Up Trend']:
-        flag = True
-
-        for down in results['Down Trend']:
-            if down['from'] < up['from'] < down['to'] or down['from'] < up['to'] < down['to']:
-                if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
-                    flag = True
-                else:
-                    flag = False
-            else:
-                flag = True
-
-        if flag is True:
-            up_trends.append(up)
-
-    if labels is None:
-        up_labels = [letter for letter in string.ascii_uppercase[:len(up_trends)]]
-    else:
-        up_labels = labels
-
-    for up_trend, up_label in zip(up_trends, up_labels):
-        for index, row in df[up_trend['from']:up_trend['to']].iterrows():
-            df.loc[index, 'Up Trend'] = up_label
-
-    for down in results['Down Trend']:
-        flag = True
+    if identify == 'both':
+        up_trends = list()
 
         for up in results['Up Trend']:
-            if up['from'] < down['from'] < up['to'] or up['from'] < down['to'] < up['to']:
-                if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
-                    flag = True
+            flag = True
+
+            for down in results['Down Trend']:
+                if down['from'] < up['from'] < down['to'] or down['from'] < up['to'] < down['to']:
+                    if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
+                        flag = True
+                    else:
+                        flag = False
                 else:
-                    flag = False
-            else:
-                flag = True
+                    flag = True
 
-        if flag is True:
-            down_trends.append(down)
+            if flag is True:
+                up_trends.append(up)
 
-    if labels is None:
-        down_labels = [letter for letter in string.ascii_uppercase[:len(down_trends)]]
-    else:
-        down_labels = labels
+        if labels is None:
+            up_labels = [letter for letter in string.ascii_uppercase[:len(up_trends)]]
+        else:
+            up_labels = labels
 
-    for down_trend, down_label in zip(down_trends, down_labels):
-        for index, row in df[down_trend['from']:down_trend['to']].iterrows():
-            df.loc[index, 'Down Trend'] = down_label
+        for up_trend, up_label in zip(up_trends, up_labels):
+            for index, row in df[up_trend['from']:up_trend['to']].iterrows():
+                df.loc[index, 'Up Trend'] = up_label
 
-    return df
+        down_trends = list()
+
+        for down in results['Down Trend']:
+            flag = True
+
+            for up in results['Up Trend']:
+                if up['from'] < down['from'] < up['to'] or up['from'] < down['to'] < up['to']:
+                    if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
+                        flag = True
+                    else:
+                        flag = False
+                else:
+                    flag = True
+
+            if flag is True:
+                down_trends.append(down)
+
+        if labels is None:
+            down_labels = [letter for letter in string.ascii_uppercase[:len(down_trends)]]
+        else:
+            down_labels = labels
+
+        for down_trend, down_label in zip(down_trends, down_labels):
+            for index, row in df[down_trend['from']:down_trend['to']].iterrows():
+                df.loc[index, 'Down Trend'] = down_label
+
+        return df
+    elif identify == 'up':
+        up_trends = results['Up Trend']
+
+        if labels is None:
+            up_labels = [letter for letter in string.ascii_uppercase[:len(up_trends)]]
+        else:
+            up_labels = labels
+
+        for up_trend, up_label in zip(up_trends, up_labels):
+            for index, row in df[up_trend['from']:up_trend['to']].iterrows():
+                df.loc[index, 'Up Trend'] = up_label
+
+        return df
+    elif identify == 'down':
+        down_trends = results['Down Trend']
+
+        if labels is None:
+            down_labels = [letter for letter in string.ascii_uppercase[:len(down_trends)]]
+        else:
+            down_labels = labels
+
+        for down_trend, down_label in zip(down_trends, down_labels):
+            for index, row in df[down_trend['from']:down_trend['to']].iterrows():
+                df.loc[index, 'Down Trend'] = down_label
+
+        return df
 
 
-def identify_all_trends(equity, from_date, to_date, window_size=5):
+def identify_all_trends(equity, from_date, to_date, window_size=5, identify='both'):
     """
     This function retrieves historical data from the introduced `equity` between two dates from Investing via investpy;
     and that data is later going to be analysed in order to detect/identify trends over a certain date range. A trend
@@ -216,6 +256,8 @@ def identify_all_trends(equity, from_date, to_date, window_size=5):
         from_date (:obj:`str`): date as `str` formatted as `dd/mm/yyyy`, from where data is going to be retrieved.
         to_date (:obj:`str`): date as `str` formatted as `dd/mm/yyyy`, until where data is going to be retrieved.
         window_size (:obj:`window`, optional): number of days from where market behaviour is considered a trend.
+        identify (:obj:`str`, optional):
+            which trends does the user wants to be identified, it can either be 'both', 'up' or 'down'.
 
     Returns:
         :obj:`pandas.DataFrame`:
@@ -255,6 +297,12 @@ def identify_all_trends(equity, from_date, to_date, window_size=5):
     if isinstance(window_size, int) and window_size < 3:
         raise ValueError('window_size must be an `int` equal or higher than 3!')
 
+    if not isinstance(identify, str):
+        raise ValueError('identify should be a `str` contained in [both, up, down]!')
+
+    if isinstance(identify, str) and identify not in ['both', 'up', 'down']:
+        raise ValueError('identify should be a `str` contained in [both, up, down]!')
+
     try:
         df = get_historical_data(equity=str(equity),
                                  from_date=from_date,
@@ -267,19 +315,23 @@ def identify_all_trends(equity, from_date, to_date, window_size=5):
 
     objs = list()
 
-    up_trends = {
+    up_trend = {
         'name': 'Up Trend',
         'element': np.negative(df['Close'])
     }
 
-    objs.append(up_trends)
-
-    down_trends = {
+    down_trend = {
         'name': 'Down Trend',
         'element': df['Close']
     }
 
-    objs.append(down_trends)
+    if identify == 'both':
+        objs.append(up_trend)
+        objs.append(down_trend)
+    elif identify == 'up':
+        objs.append(up_trend)
+    elif identify == 'down':
+        objs.append(down_trend)
 
     results = dict()
 
@@ -320,49 +372,71 @@ def identify_all_trends(equity, from_date, to_date, window_size=5):
 
         results[obj['name']] = trends
 
-    up_trends = list()
-    down_trends = list()
-
-    for up in results['Up Trend']:
-        flag = True
-
-        for down in results['Down Trend']:
-            if down['from'] < up['from'] < down['to'] or down['from'] < up['to'] < down['to']:
-                if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
-                    flag = True
-                else:
-                    flag = False
-            else:
-                flag = True
-
-        if flag is True:
-            up_trends.append(up)
-
-    labels = [letter for letter in string.ascii_uppercase[:len(up_trends)]]
-
-    for up_trend, label in zip(up_trends, labels):
-        for index, row in df[up_trend['from']:up_trend['to']].iterrows():
-            df.loc[index, 'Up Trend'] = label
-
-    for down in results['Down Trend']:
-        flag = True
+    if identify == 'both':
+        up_trends = list()
 
         for up in results['Up Trend']:
-            if up['from'] < down['from'] < up['to'] or up['from'] < down['to'] < up['to']:
-                if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
-                    flag = True
+            flag = True
+
+            for down in results['Down Trend']:
+                if down['from'] < up['from'] < down['to'] or down['from'] < up['to'] < down['to']:
+                    if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
+                        flag = True
+                    else:
+                        flag = False
                 else:
-                    flag = False
-            else:
-                flag = True
+                    flag = True
 
-        if flag is True:
-            down_trends.append(down)
+            if flag is True:
+                up_trends.append(up)
 
-    labels = [letter for letter in string.ascii_uppercase[:len(down_trends)]]
+        labels = [letter for letter in string.ascii_uppercase[:len(up_trends)]]
 
-    for down_trend, label in zip(down_trends, labels):
-        for index, row in df[down_trend['from']:down_trend['to']].iterrows():
-            df.loc[index, 'Down Trend'] = label
+        for up_trend, label in zip(up_trends, labels):
+            for index, row in df[up_trend['from']:up_trend['to']].iterrows():
+                df.loc[index, 'Up Trend'] = label
 
-    return df
+        down_trends = list()
+
+        for down in results['Down Trend']:
+            flag = True
+
+            for up in results['Up Trend']:
+                if up['from'] < down['from'] < up['to'] or up['from'] < down['to'] < up['to']:
+                    if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
+                        flag = True
+                    else:
+                        flag = False
+                else:
+                    flag = True
+
+            if flag is True:
+                down_trends.append(down)
+
+        labels = [letter for letter in string.ascii_uppercase[:len(down_trends)]]
+
+        for down_trend, label in zip(down_trends, labels):
+            for index, row in df[down_trend['from']:down_trend['to']].iterrows():
+                df.loc[index, 'Down Trend'] = label
+
+        return df
+    elif identify == 'up':
+        up_trends = results['Up Trend']
+
+        up_labels = [letter for letter in string.ascii_uppercase[:len(up_trends)]]
+
+        for up_trend, up_label in zip(up_trends, up_labels):
+            for index, row in df[up_trend['from']:up_trend['to']].iterrows():
+                df.loc[index, 'Up Trend'] = up_label
+
+        return df
+    elif identify == 'down':
+        down_trends = results['Down Trend']
+
+        down_labels = [letter for letter in string.ascii_uppercase[:len(down_trends)]]
+
+        for down_trend, down_label in zip(down_trends, down_labels):
+            for index, row in df[down_trend['from']:down_trend['to']].iterrows():
+                df.loc[index, 'Down Trend'] = down_label
+
+        return df

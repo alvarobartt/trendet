@@ -11,10 +11,10 @@ def readme():
 
 setup(
     name='trendet',
-    version='0.3',
+    version='0.4',
     packages=find_packages(),
     url='https://github.com/alvarob96/trendet',
-    download_url='https://github.com/alvarob96/trendet/archive/0.3.tar.gz',
+    download_url='https://github.com/alvarob96/trendet/archive/0.4.tar.gz',
     license='MIT License',
     author='Alvaro Bartolome',
     author_email='alvarob96@usal.es',

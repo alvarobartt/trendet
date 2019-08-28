@@ -15,7 +15,9 @@ def test_trendet():
     """
 
     author = trendet.__author__
+    print(author)
     version = trendet.__version__
+    print(version)
 
     equities = investpy.get_equities_list()
 
@@ -29,6 +31,7 @@ def test_trendet():
             'window_size': 5,
             'trend_limit': 5,
             'labels': None,
+            'identify': 'both',
         }
 
         params.append(obj)
@@ -44,18 +47,44 @@ def test_trendet():
 
     params.append(obj)
 
+    obj = {
+        'equity': 'bbva',
+        'from_date': '01/01/2018',
+        'to_date': '01/01/2019',
+        'window_size': 5,
+        'trend_limit': 2,
+        'labels': None,
+        'identify': 'up',
+    }
+
+    params.append(obj)
+
+    obj = {
+        'equity': 'bbva',
+        'from_date': '01/01/2018',
+        'to_date': '01/01/2019',
+        'window_size': 5,
+        'trend_limit': 2,
+        'labels': None,
+        'identify': 'down',
+    }
+
+    params.append(obj)
+
     for param in params:
         trendet.identify_trends(equity=param['equity'],
                                 from_date=param['from_date'],
                                 to_date=param['to_date'],
                                 window_size=param['window_size'],
                                 trend_limit=param['trend_limit'],
-                                labels=param['labels'])
+                                labels=param['labels'],
+                                identify=param['identify'])
 
         trendet.identify_all_trends(equity=param['equity'],
                                     from_date=param['from_date'],
                                     to_date=param['to_date'],
-                                    window_size=param['window_size'])
+                                    window_size=param['window_size'],
+                                    identify=param['identify'])
 
 
 if __name__ == '__main__':

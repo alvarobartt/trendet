@@ -21,6 +21,7 @@ def test_errors():
             'window_size': 1,
             'trend_limit': 3,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': None,
@@ -29,6 +30,7 @@ def test_errors():
             'window_size': 1,
             'trend_limit': 3,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'error',
@@ -37,6 +39,7 @@ def test_errors():
             'window_size': 5,
             'trend_limit': 3,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -45,6 +48,7 @@ def test_errors():
             'window_size': 5,
             'trend_limit': 3,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -53,6 +57,7 @@ def test_errors():
             'window_size': 5,
             'trend_limit': 3,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -61,6 +66,7 @@ def test_errors():
             'window_size': 5,
             'trend_limit': 3,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -69,6 +75,7 @@ def test_errors():
             'window_size': 5,
             'trend_limit': 3,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -77,6 +84,7 @@ def test_errors():
             'window_size': 5,
             'trend_limit': 3,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -85,6 +93,7 @@ def test_errors():
             'window_size': 0,
             'trend_limit': 3,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -93,6 +102,7 @@ def test_errors():
             'window_size': 5,
             'trend_limit': -1,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -101,6 +111,7 @@ def test_errors():
             'window_size': 5,
             'trend_limit': None,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -109,6 +120,7 @@ def test_errors():
             'window_size': None,
             'trend_limit': 1,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -117,6 +129,7 @@ def test_errors():
             'window_size': 'error',
             'trend_limit': 1,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -125,6 +138,7 @@ def test_errors():
             'window_size': 1,
             'trend_limit': 'error',
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -133,6 +147,7 @@ def test_errors():
             'window_size': 2,
             'trend_limit': 5,
             'labels': None,
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -141,6 +156,7 @@ def test_errors():
             'window_size': 5,
             'trend_limit': 3,
             'labels': ['a', 'b'],
+            'identify': 'both',
         },
         {
             'equity': 'bbva',
@@ -149,6 +165,25 @@ def test_errors():
             'window_size': 5,
             'trend_limit': 3,
             'labels': 'error',
+            'identify': 'both',
+        },
+        {
+            'equity': 'bbva',
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 3,
+            'labels': None,
+            'identify': ['error'],
+        },
+        {
+            'equity': 'bbva',
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 3,
+            'labels': None,
+            'identify': 'error',
         },
     ]
 
@@ -159,7 +194,8 @@ def test_errors():
                                     to_date=param['to_date'],
                                     window_size=param['window_size'],
                                     trend_limit=param['trend_limit'],
-                                    labels=param['labels'])
+                                    labels=param['labels'],
+                                    identify=param['identify'])
         except:
             pass
 
@@ -167,7 +203,8 @@ def test_errors():
             trendet.identify_all_trends(equity=param['equity'],
                                         from_date=param['from_date'],
                                         to_date=param['to_date'],
-                                        window_size=param['window_size'])
+                                        window_size=param['window_size'],
+                                        identify=param['identify'])
         except:
             pass
 

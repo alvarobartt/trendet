@@ -28,7 +28,7 @@ In order to get this package working you will need to install it using pip by ty
 
 Or just install the current release or a specific release version such as:
 
-``$ python -m pip install trendet==0.3``
+``$ python -m pip install trendet==0.4``
 
 ## Usage
 
@@ -36,9 +36,9 @@ As **trendet** is intended to be combined with **investpy**, the main functional
 detect trends on stock time series data so to analyse the market and which behaviour does it have
 in certain date ranges.
 
-In the example presented below, the ``identify_trends`` function will be used to detect 3 bearish/bullish trends
-with a time window above 5 days, which implies that every bearish (decreasing) trend with a longer
-duration than 5 days will be identified and so on added to a ``pandas.DataFrame`` which already contains
+In the example presented below, the ``identify_all_trends`` function will be used to detect every bearish/bullish trend
+with a time window above 5 days, which, for example, implies that every bearish (decreasing) trend with a longer
+length than 5 days will be identified as a down trend and so on added to a ``pandas.DataFrame`` which already contains
 OHLC values, in new columns called **Up Trend** and **Down Trend** which will be labeled as specified, with letters 
 from A to Z by default.
 
@@ -50,12 +50,11 @@ import seaborn as sns
 
 sns.set(style='darkgrid')
 
-df = trendet.identify_trends(equity='bbva',
-                             from_date='01/01/2018',
-                             to_date='01/01/2019',
-                             window_size=5,
-                             trend_limit=3,
-                             labels=['A', 'B', 'C'])
+df = trendet.identify_all_trends(equity='bbva',
+                                 from_date='01/01/2018',
+                                 to_date='01/01/2019',
+                                 window_size=5,
+                                 identify='both')
 
 df.reset_index(inplace=True)
 
@@ -64,26 +63,29 @@ with plt.style.context('paper'):
 
     ax = sns.lineplot(x=df['Date'], y=df['Close'])
 
-    values = list()
+    labels = df['Up Trend'].dropna().unique().tolist()
 
-    value = {
-        'trend': 'Up Trend',
-        'color': 'green',
-    }
+    for label in labels:
+        sns.lineplot(x=df[df['Up Trend'] == label]['Date'],
+                     y=df[df['Up Trend'] == label]['Close'],
+                     color='green')
 
-    values.append(value)
+        ax.axvspan(df[df['Up Trend'] == label]['Date'].iloc[0],
+                   df[df['Up Trend'] == label]['Date'].iloc[-1],
+                   alpha=0.2,
+                   color='green')
 
-    value = {
-        'trend': 'Down Trend',
-        'color': 'red',
-    }
+    labels = df['Down Trend'].dropna().unique().tolist()
 
-    values.append(value)
+    for label in labels:
+        sns.lineplot(x=df[df['Down Trend'] == label]['Date'],
+                     y=df[df['Down Trend'] == label]['Close'],
+                     color='red')
 
-    for label in ['A', 'B', 'C']:
-        for value in values:
-            sns.lineplot(x=df[df[value['trend']] == label]['Date'], y=df[df[value['trend']] == label]['Close'], color=value['color'])
-            ax.axvspan(df[df[value['trend']] == label]['Date'].iloc[0], df[df[value['trend']] == label]['Date'].iloc[-1], alpha=0.2, color=value['color'])
+        ax.axvspan(df[df['Down Trend'] == label]['Date'].iloc[0],
+                   df[df['Down Trend'] == label]['Date'].iloc[-1],
+                   alpha=0.2,
+                   color='red')
 
     plt.show()
 ````
