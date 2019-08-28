@@ -43,6 +43,7 @@ def test_trendet():
         'window_size': 5,
         'trend_limit': 2,
         'labels': ['A', 'B'],
+        'identify': 'both'
     }
 
     params.append(obj)
