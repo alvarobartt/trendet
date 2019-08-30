@@ -66,7 +66,31 @@ def test_trendet():
         'to_date': '01/01/2019',
         'window_size': 5,
         'trend_limit': 2,
+        'labels': ['A', 'B'],
+        'identify': 'up',
+    }
+
+    params.append(obj)
+
+    obj = {
+        'equity': 'bbva',
+        'from_date': '01/01/2018',
+        'to_date': '01/01/2019',
+        'window_size': 5,
+        'trend_limit': 2,
         'labels': None,
+        'identify': 'down',
+    }
+
+    params.append(obj)
+
+    obj = {
+        'equity': 'bbva',
+        'from_date': '01/01/2018',
+        'to_date': '01/01/2019',
+        'window_size': 5,
+        'trend_limit': 2,
+        'labels': ['A', 'B'],
         'identify': 'down',
     }
 
