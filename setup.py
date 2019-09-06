@@ -22,7 +22,7 @@ setup(
     long_description=readme(),
     long_description_content_type='text/markdown',
     install_requires=[
-        'investpy>=0.8.8',
+        'investpy>=0.8.9',
         'numpy>=1.17.0',
         'setuptools>=41.2.0'
     ],
@@ -39,5 +39,11 @@ setup(
         "Topic :: Scientific/Engineering :: Information Analysis",
         "Topic :: Software Development :: Libraries",
     ],
-    keywords='trend detection, stock analysis, stock, trend analysis'
+    keywords='trend detection, stock analysis, stock, trend analysis',
+    python_requires='>=3',
+    project_urls={
+        'Bug Reports': 'https://github.com/alvarob96/trendet/issues',
+        'Source': 'https://github.com/alvarob96/trendet',
+        'Documentation': 'https://trendet.readthedocs.io/'
+    },
 )
