@@ -1,9 +1,12 @@
 Usage
 =====
 
-As **trendet** is intended to be combined with **investpy**, the main functionality is to
-detect trends on stock time series data so to analyse the market and which behaviour does it have
-in certain date ranges.
+As **trendet** is intended to be combined with **investpy**, the main functionality is to detect trends on stock time
+series data so to analyse the market and which behaviour does it have in certain date ranges. Anyways, **trendet** can
+also be used with any custom `pandas.DataFrame`.
+
+Identify Custom Trends of investpy DataFrames
+---------------------------------------------
 
 In the example presented below, the ``identify_trends`` function will be used to detect 3 bearish/bullish trends
 with a time window above 5 days, which implies that every bearish (decreasing) trend with a longer
@@ -62,6 +65,9 @@ So on, the resulting plot which will be outputted from the previous block of cod
 .. image:: https://raw.githubusercontent.com/alvarob96/trendet/master/docs/trendet_example.png
     :align: center
 
+Identify All Trends of investpy DataFrame
+-----------------------------------------
+
 Additionally **trendet** allows the user to identify/detect all the up and down trends on the market
 via the function `identify_all_trends` which has been included in 0.4 release. So on, the sample code for
 its usage is as follows:
@@ -118,4 +124,64 @@ data removing overlapped trends keeping just the longer trend as minor trends ar
 output of the previous block of code on **trendet** usage is the following plot:
 
 .. image:: https://raw.githubusercontent.com/alvarob96/trendet/master/docs/trendet_example_all.png
+    :align: center
+
+Identify Trends of Custom DataFrame
+-----------------------------------
+
+Anyways, you can also use **trendet** for custom any `pandas.DataFrame` even though it is intended to be used combined
+with **investpy**. So on, via using `identify_df_trends()` function the trends from the specified `pandas.DataFrame` can be
+identified, just specifying the column from where the trends wants to be identified. In the example proposed below, an
+**investpy** `pandas.DataFrame` is being used, but you can use any other `pandas.DataFrame` which matches the specified conditions
+which are that the values can just be `int64` or `float64` and the specified column should be in the `pandas.DataFrame`.
+
+.. code-block:: python
+
+    import investpy
+
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    sns.set(style='whitegrid')
+
+    test = investpy.get_historical_data(equity='repsol', country='spain', from_date='01/01/2018', to_date='01/01/2019')
+
+    res = identify_df_trends(df=test, column='Close')
+
+    res.reset_index(inplace=True)
+
+    with plt.style.context('paper'):
+        plt.figure(figsize=(20, 10))
+
+        ax = sns.lineplot(x=res['Date'], y=res['Close'])
+
+        labels = res['Up Trend'].dropna().unique().tolist()
+
+        for label in labels:
+            sns.lineplot(x=res[res['Up Trend'] == label]['Date'],
+                         y=res[res['Up Trend'] == label]['Close'],
+                         color='green')
+
+            ax.axvspan(res[res['Up Trend'] == label]['Date'].iloc[0],
+                       res[res['Up Trend'] == label]['Date'].iloc[-1],
+                       alpha=0.2,
+                       color='green')
+
+        labels = res['Down Trend'].dropna().unique().tolist()
+
+        for label in labels:
+            sns.lineplot(x=res[res['Down Trend'] == label]['Date'],
+                         y=res[res['Down Trend'] == label]['Close'],
+                         color='red')
+
+            ax.axvspan(res[res['Down Trend'] == label]['Date'].iloc[0],
+                       res[res['Down Trend'] == label]['Date'].iloc[-1],
+                       alpha=0.2,
+                       color='red')
+
+        plt.show()
+
+Which outputs the following plot:
+
+.. image:: https://raw.githubusercontent.com/alvarob96/trendet/master/docs/trendet_example_df.png
     :align: center

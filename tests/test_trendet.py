@@ -19,13 +19,16 @@ def test_trendet():
     version = trendet.__version__
     print(version)
 
-    equities = investpy.get_equities_list()
+    equities = investpy.get_equities(country='spain')
+
+    equities = equities['name'].tolist()
 
     params = list()
 
-    for equity in equities[:15]:
+    for equity in equities[:10]:
         obj = {
             'equity': equity,
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -38,6 +41,7 @@ def test_trendet():
 
     obj = {
         'equity': 'bbva',
+        'country': 'spain',
         'from_date': '01/01/2018',
         'to_date': '01/01/2019',
         'window_size': 5,
@@ -50,6 +54,7 @@ def test_trendet():
 
     obj = {
         'equity': 'bbva',
+        'country': 'spain',
         'from_date': '01/01/2018',
         'to_date': '01/01/2019',
         'window_size': 5,
@@ -62,6 +67,7 @@ def test_trendet():
 
     obj = {
         'equity': 'bbva',
+        'country': 'spain',
         'from_date': '01/01/2018',
         'to_date': '01/01/2019',
         'window_size': 5,
@@ -74,6 +80,7 @@ def test_trendet():
 
     obj = {
         'equity': 'bbva',
+        'country': 'spain',
         'from_date': '01/01/2018',
         'to_date': '01/01/2019',
         'window_size': 5,
@@ -86,6 +93,7 @@ def test_trendet():
 
     obj = {
         'equity': 'bbva',
+        'country': 'spain',
         'from_date': '01/01/2018',
         'to_date': '01/01/2019',
         'window_size': 5,
@@ -98,6 +106,7 @@ def test_trendet():
 
     for param in params:
         trendet.identify_trends(equity=param['equity'],
+                                country=param['country'],
                                 from_date=param['from_date'],
                                 to_date=param['to_date'],
                                 window_size=param['window_size'],
@@ -106,6 +115,7 @@ def test_trendet():
                                 identify=param['identify'])
 
         trendet.identify_all_trends(equity=param['equity'],
+                                    country=param['country'],
                                     from_date=param['from_date'],
                                     to_date=param['to_date'],
                                     window_size=param['window_size'],

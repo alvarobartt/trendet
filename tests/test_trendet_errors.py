@@ -16,24 +16,27 @@ def test_errors():
     params = [
         {
             'equity': ['error'],
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
-            'window_size': 1,
+            'window_size': 5,
             'trend_limit': 3,
             'labels': None,
             'identify': 'both',
         },
         {
             'equity': None,
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
-            'window_size': 1,
+            'window_size': 5,
             'trend_limit': 3,
             'labels': None,
             'identify': 'both',
         },
         {
             'equity': 'error',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -43,6 +46,37 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': None,
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 3,
+            'labels': None,
+            'identify': 'both',
+        },
+        {
+            'equity': 'bbva',
+            'country': 'error',
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 3,
+            'labels': None,
+            'identify': 'both',
+        },
+        {
+            'equity': 'bbva',
+            'country': ['error'],
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 3,
+            'labels': None,
+            'identify': 'both',
+        },
+        {
+            'equity': 'bbva',
+            'country': 'spain',
             'from_date': None,
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -52,6 +86,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': None,
             'window_size': 5,
@@ -61,6 +96,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2019',
             'to_date': '01/01/2018',
             'window_size': 5,
@@ -70,6 +106,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01-2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -79,6 +116,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '_01*01/2019',
             'window_size': 5,
@@ -88,6 +126,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 0,
@@ -97,6 +136,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -106,6 +146,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -115,6 +156,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': None,
@@ -124,6 +166,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 'error',
@@ -133,6 +176,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 1,
@@ -142,6 +186,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 2,
@@ -151,6 +196,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -160,6 +206,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -169,6 +216,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -178,6 +226,7 @@ def test_errors():
         },
         {
             'equity': 'bbva',
+            'country': 'spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -190,6 +239,7 @@ def test_errors():
     for param in params:
         try:
             trendet.identify_trends(equity=param['equity'],
+                                    country=param['country'],
                                     from_date=param['from_date'],
                                     to_date=param['to_date'],
                                     window_size=param['window_size'],
@@ -201,6 +251,7 @@ def test_errors():
 
         try:
             trendet.identify_all_trends(equity=param['equity'],
+                                        country=param['country'],
                                         from_date=param['from_date'],
                                         to_date=param['to_date'],
                                         window_size=param['window_size'],

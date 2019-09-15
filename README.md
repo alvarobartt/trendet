@@ -20,6 +20,10 @@ has been created to support [investpy](https://github.com/alvarob96/investpy) fe
 from different financial products such as stocks/equities, funds or ETFs; and it is intended to be combined with it, 
 but also with every `pandas.DataFrame`, formatted as OHLC.
 
+Anyways, **trendet** can also be used to identify trends from any `pandas.DataFrame` which contains any column with
+`int64` or `float64` values, even though it is intended to be used with stock data; it can also be used for any
+`pandas.DataFrame`.
+
 ## Installation
 
 In order to get this package working you will need to install it using pip by typing on the terminal:
