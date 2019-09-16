@@ -25,7 +25,7 @@ def test_trendet():
 
     params = list()
 
-    for equity in equities[:10]:
+    for equity in equities[:20]:
         obj = {
             'equity': equity,
             'country': 'spain',
@@ -120,6 +120,38 @@ def test_trendet():
                                     to_date=param['to_date'],
                                     window_size=param['window_size'],
                                     identify=param['identify'])
+
+    df = investpy.get_historical_data(equity='repsol',
+                                      country='spain',
+                                      from_date='01/01/2018',
+                                      to_date='01/01/2019')
+
+    params = [
+        {
+            'df': df,
+            'column': 'Close',
+            'window_size': 5,
+            'identify': 'both'
+        },
+        {
+            'df': df,
+            'column': 'Close',
+            'window_size': 5,
+            'identify': 'up'
+        },
+        {
+            'df': df,
+            'column': 'Close',
+            'window_size': 5,
+            'identify': 'down'
+        },
+    ]
+
+    for param in params:
+        trendet.identify_df_trends(df=param['df'],
+                                   column=param['column'],
+                                   window_size=param['window_size'],
+                                   identify=param['identify'])
 
 
 if __name__ == '__main__':

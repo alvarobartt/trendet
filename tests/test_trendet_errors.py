@@ -6,6 +6,7 @@
 import pytest
 
 import trendet
+import investpy
 
 
 def test_errors():
@@ -256,6 +257,85 @@ def test_errors():
                                         to_date=param['to_date'],
                                         window_size=param['window_size'],
                                         identify=param['identify'])
+        except:
+            pass
+
+    df = investpy.get_historical_data(equity='repsol',
+                                      country='spain',
+                                      from_date='01/01/2018',
+                                      to_date='01/01/2019')
+
+    df['str'] = 'error'
+
+    params = [
+        {
+            'df': None,
+            'column': 'Close',
+            'window_size': 5,
+            'identify': 'both'
+        },
+        {
+            'df': ['error'],
+            'column': 'Close',
+            'window_size': 5,
+            'identify': 'both'
+        },
+        {
+            'df': df,
+            'column': None,
+            'window_size': 5,
+            'identify': 'both'
+        },
+        {
+            'df': df,
+            'column': ['error'],
+            'window_size': 5,
+            'identify': 'both'
+        },
+        {
+            'df': df,
+            'column': 'error',
+            'window_size': 5,
+            'identify': 'both'
+        },
+        {
+            'df': df,
+            'column': 'str',
+            'window_size': 5,
+            'identify': 'both'
+        },
+        {
+            'df': df,
+            'column': 'Close',
+            'window_size': None,
+            'identify': 'both'
+        },
+        {
+            'df': df,
+            'column': 'Close',
+            'window_size': 1,
+            'identify': 'both'
+        },
+        {
+            'df': df,
+            'column': 'Close',
+            'window_size': 1,
+            'identify': ['error']
+        },
+        {
+            'df': df,
+            'column': 'Close',
+            'window_size': 1,
+            'identify': 'error'
+        },
+    ]
+
+    for param in params:
+        try:
+            trendet.identify_df_trends(df=param['df'],
+                                       column=param['column'],
+                                       window_size=param['window_size'],
+                                       identify=param['identify'])
         except:
             pass
 
