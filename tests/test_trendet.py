@@ -25,7 +25,7 @@ def test_trendet():
 
     params = list()
 
-    for equity in equities[:20]:
+    for equity in equities[:25]:
         obj = {
             'equity': equity,
             'country': 'spain',

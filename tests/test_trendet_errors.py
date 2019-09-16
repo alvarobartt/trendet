@@ -319,13 +319,13 @@ def test_errors():
         {
             'df': df,
             'column': 'Close',
-            'window_size': 1,
+            'window_size': 5,
             'identify': ['error']
         },
         {
             'df': df,
             'column': 'Close',
-            'window_size': 1,
+            'window_size': 5,
             'identify': 'error'
         },
     ]

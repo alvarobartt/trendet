@@ -4,7 +4,7 @@
 # See LICENSE for details.
 
 __author__ = 'Alvaro Bartolome @ alvarob96 on GitHub'
-__version__ = '0.4'
+__version__ = '0.5'
 
 from investpy import get_historical_data, get_equity_countries
 

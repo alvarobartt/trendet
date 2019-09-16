@@ -32,7 +32,7 @@ In order to get this package working you will need to install it using pip by ty
 
 Or just install the current release or a specific release version such as:
 
-``$ python -m pip install trendet==0.4``
+``$ python -m pip install trendet==0.5``
 
 ## Usage
 
@@ -55,6 +55,7 @@ import seaborn as sns
 sns.set(style='darkgrid')
 
 df = trendet.identify_all_trends(equity='bbva',
+                                 country='spain',
                                  from_date='01/01/2018',
                                  to_date='01/01/2019',
                                  window_size=5,
