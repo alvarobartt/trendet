@@ -24,6 +24,7 @@ to Z by default.
     sns.set(style='darkgrid')
 
     df = trendet.identify_trends(equity='bbva',
+                                 country='spain',
                                  from_date='01/01/2018',
                                  to_date='01/01/2019',
                                  window_size=5,
@@ -82,6 +83,7 @@ its usage is as follows:
     sns.set(style='darkgrid')
 
     df = identify_all_trends(equity='bbva',
+                             country='spain',
                              from_date='01/01/2018',
                              to_date='01/01/2019',
                              window_size=5)
@@ -137,14 +139,18 @@ which are that the values can just be `int64` or `float64` and the specified col
 
 .. code-block:: python
 
+    import trendet
     import investpy
 
     import matplotlib.pyplot as plt
     import seaborn as sns
 
-    sns.set(style='whitegrid')
+    sns.set(style='darkgrid')
 
-    test = investpy.get_historical_data(equity='repsol', country='spain', from_date='01/01/2018', to_date='01/01/2019')
+    test = investpy.get_historical_data(equity='repsol',
+                                        country='spain',
+                                        from_date='01/01/2018',
+                                        to_date='01/01/2019')
 
     res = identify_df_trends(df=test, column='Close')
 
