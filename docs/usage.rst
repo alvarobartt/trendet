@@ -3,7 +3,7 @@ Usage
 
 As **trendet** is intended to be combined with **investpy**, the main functionality is to detect trends on stock time
 series data so to analyse the market and which behaviour does it have in certain date ranges. Anyways, **trendet** can
-also be used with any custom `pandas.DataFrame`.
+also be used with any custom ``pandas.DataFrame``.
 
 Identify Custom Trends of investpy DataFrames
 ---------------------------------------------
@@ -11,7 +11,7 @@ Identify Custom Trends of investpy DataFrames
 In the example presented below, the ``identify_trends`` function will be used to detect 3 bearish/bullish trends
 with a time window above 5 days, which implies that every bearish (decreasing) trend with a longer
 duration than 5 days will be identified and so on added to a ``pandas.DataFrame`` which already contains
-OHLC values, in new columns called `Up Trend` and `Down Trend` which will be labeled as specified, with letters from A
+OHLC values, in new columns called ``Up Trend`` and ``Down Trend`` which will be labeled as specified, with letters from A
 to Z by default.
 
 .. code-block:: python
@@ -70,7 +70,7 @@ Identify All Trends of investpy DataFrame
 -----------------------------------------
 
 Additionally **trendet** allows the user to identify/detect all the up and down trends on the market
-via the function `identify_all_trends` which has been included in 0.5 release. So on, the sample code for
+via the function ``identify_all_trends`` which has been included in 0.5 release. So on, the sample code for
 its usage is as follows:
 
 .. code-block:: python
@@ -82,11 +82,11 @@ its usage is as follows:
 
     sns.set(style='darkgrid')
 
-    df = identify_all_trends(equity='bbva',
-                             country='spain',
-                             from_date='01/01/2018',
-                             to_date='01/01/2019',
-                             window_size=5)
+    df = trendet.identify_all_trends(equity='bbva',
+                                     country='spain',
+                                     from_date='01/01/2018',
+                                     to_date='01/01/2019',
+                                     window_size=5)
 
     df.reset_index(inplace=True)
 
@@ -131,11 +131,11 @@ output of the previous block of code on **trendet** usage is the following plot:
 Identify Trends of Custom DataFrame
 -----------------------------------
 
-Anyways, you can also use **trendet** for custom any `pandas.DataFrame` even though it is intended to be used combined
-with **investpy**. So on, via using `identify_df_trends()` function the trends from the specified `pandas.DataFrame` can be
+Anyways, you can also use **trendet** for custom any ``pandas.DataFrame`` even though it is intended to be used combined
+with **investpy**. So on, via using ``identify_df_trends()`` function the trends from the specified ``pandas.DataFrame`` can be
 identified, just specifying the column from where the trends wants to be identified. In the example proposed below, an
-**investpy** `pandas.DataFrame` is being used, but you can use any other `pandas.DataFrame` which matches the specified conditions
-which are that the values can just be `int64` or `float64` and the specified column should be in the `pandas.DataFrame`.
+**investpy** ``pandas.DataFrame`` is being used, but you can use any other ``pandas.DataFrame`` which matches the specified conditions
+which are that the values can just be ``int64`` or ``float64`` and the specified column should be in the ``pandas.DataFrame``.
 
 .. code-block:: python
 
@@ -152,7 +152,7 @@ which are that the values can just be `int64` or `float64` and the specified col
                                         from_date='01/01/2018',
                                         to_date='01/01/2019')
 
-    res = identify_df_trends(df=test, column='Close')
+    res = trendet.identify_df_trends(df=test, column='Close')
 
     res.reset_index(inplace=True)
 
