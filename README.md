@@ -91,15 +91,12 @@ for label in labels:
                df[df['Down Trend'] == label].index[-1],
                alpha=0.2,
                color='red')
-
-locs, labels = plt.xticks()
+               
+locs, _ = plt.xticks()
 labels = []
 
-for position in locs:
-    try:
-        labels.append(str(df['Date'].loc[position])[:-9])
-    except:
-        pass
+for position in locs[1:-1]:
+    labels.append(str(df['Date'].loc[position])[:-9])
 
 plt.xticks(locs[1:-1], labels)
 plt.show()
