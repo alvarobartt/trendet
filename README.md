@@ -63,36 +63,46 @@ df = trendet.identify_all_trends(equity='bbva',
 
 df.reset_index(inplace=True)
 
-with plt.style.context('paper'):
-    plt.figure(figsize=(20, 10))
+plt.figure(figsize=(20, 10))
 
-    ax = sns.lineplot(x=df['Date'], y=df['Close'])
+ax = sns.lineplot(x=df.index, y=df['Close'])
+ax.set(xlabel='Date')
 
-    labels = df['Up Trend'].dropna().unique().tolist()
+labels = df['Up Trend'].dropna().unique().tolist()
 
-    for label in labels:
-        sns.lineplot(x=df[df['Up Trend'] == label]['Date'],
-                     y=df[df['Up Trend'] == label]['Close'],
-                     color='green')
+for label in labels:
+    sns.lineplot(x=df[df['Up Trend'] == label].index,
+                 y=df[df['Up Trend'] == label]['Close'],
+                 color='green')
 
-        ax.axvspan(df[df['Up Trend'] == label]['Date'].iloc[0],
-                   df[df['Up Trend'] == label]['Date'].iloc[-1],
-                   alpha=0.2,
-                   color='green')
+    ax.axvspan(df[df['Up Trend'] == label].index[0],
+               df[df['Up Trend'] == label].index[-1],
+               alpha=0.2,
+               color='green')
 
-    labels = df['Down Trend'].dropna().unique().tolist()
+labels = df['Down Trend'].dropna().unique().tolist()
 
-    for label in labels:
-        sns.lineplot(x=df[df['Down Trend'] == label]['Date'],
-                     y=df[df['Down Trend'] == label]['Close'],
-                     color='red')
+for label in labels:
+    sns.lineplot(x=df[df['Down Trend'] == label].index,
+                 y=df[df['Down Trend'] == label]['Close'],
+                 color='red')
 
-        ax.axvspan(df[df['Down Trend'] == label]['Date'].iloc[0],
-                   df[df['Down Trend'] == label]['Date'].iloc[-1],
-                   alpha=0.2,
-                   color='red')
+    ax.axvspan(df[df['Down Trend'] == label].index[0],
+               df[df['Down Trend'] == label].index[-1],
+               alpha=0.2,
+               color='red')
 
-    plt.show()
+locs, labels = plt.xticks()
+labels = []
+
+for position in locs:
+    try:
+        labels.append(str(df['Date'].loc[position])[:-9])
+    except:
+        pass
+
+plt.xticks(locs[1:-1], labels)
+plt.show()
 ````
 
 Further usage insights can be found on the [docs](https://trendet.readthedocs.io/) or on the following 
