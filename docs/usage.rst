@@ -23,8 +23,8 @@ to Z by default.
 
     sns.set(style='darkgrid')
 
-    df = trendet.identify_trends(equity='bbva',
-                                 country='spain',
+    df = trendet.identify_trends(stock='BBVA',
+                                 country='Spain',
                                  from_date='01/01/2018',
                                  to_date='01/01/2019',
                                  window_size=5,
@@ -63,14 +63,14 @@ to Z by default.
 
 So on, the resulting plot which will be outputted from the previous block of code will look like:
 
-.. image:: https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/trendet_example.png
+.. image:: https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/_static/trendet_example.png
     :align: center
 
 Identify All Trends of investpy DataFrame
 -----------------------------------------
 
 Additionally **trendet** allows the user to identify/detect all the up and down trends on the market
-via the function ``identify_all_trends`` which has been included in 0.5 release. So on, the sample code for
+via the function ``identify_all_trends`` which has been included in 0.6 release. So on, the sample code for
 its usage is as follows:
 
 .. code-block:: python
@@ -82,8 +82,8 @@ its usage is as follows:
 
     sns.set(style='darkgrid')
 
-    df = trendet.identify_all_trends(equity='bbva',
-                                     country='spain',
+    df = trendet.identify_all_trends(stock='BBVA',
+                                     country='Spain',
                                      from_date='01/01/2018',
                                      to_date='01/01/2019',
                                      window_size=5)
@@ -125,7 +125,7 @@ Which as described before, plots all the trends identified on the specified stoc
 data removing overlapped trends keeping just the longer trend as minor trends are ignored. So the
 output of the previous block of code on **trendet** usage is the following plot:
 
-.. image:: https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/trendet_example_all.png
+.. image:: https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/_static/trendet_example_all.png
     :align: center
 
 Identify Trends of Custom DataFrame
@@ -147,10 +147,10 @@ which are that the values can just be ``int64`` or ``float64`` and the specified
 
     sns.set(style='darkgrid')
 
-    test = investpy.get_historical_data(equity='repsol',
-                                        country='spain',
-                                        from_date='01/01/2018',
-                                        to_date='01/01/2019')
+    test = investpy.get_stock_historical_data(stock='REP',
+                                              country='Spain',
+                                              from_date='01/01/2018',
+                                              to_date='01/01/2019')
 
     res = trendet.identify_df_trends(df=test, column='Close')
 
@@ -189,5 +189,5 @@ which are that the values can just be ``int64`` or ``float64`` and the specified
 
 Which outputs the following plot:
 
-.. image:: https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/trendet_example_df.png
+.. image:: https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/_static/trendet_example_df.png
     :align: center

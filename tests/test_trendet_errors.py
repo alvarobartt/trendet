@@ -3,8 +3,9 @@
 
 import pytest
 
+from investpy import get_stock_historical_data
+
 import trendet
-import investpy
 
 
 def test_errors():
@@ -14,8 +15,8 @@ def test_errors():
 
     params = [
         {
-            'equity': ['error'],
-            'country': 'spain',
+            'stock': ['error'],
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -24,8 +25,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': None,
-            'country': 'spain',
+            'stock': None,
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -34,8 +35,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'error',
-            'country': 'spain',
+            'stock': 'error',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -44,7 +45,7 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
+            'stock': 'BBVA',
             'country': None,
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
@@ -54,7 +55,7 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
+            'stock': 'BBVA',
             'country': 'error',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
@@ -64,7 +65,7 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
+            'stock': 'BBVA',
             'country': ['error'],
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
@@ -74,8 +75,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': None,
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -84,8 +85,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': None,
             'window_size': 5,
@@ -94,8 +95,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2019',
             'to_date': '01/01/2018',
             'window_size': 5,
@@ -104,8 +105,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01-2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -114,8 +115,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '_01*01/2019',
             'window_size': 5,
@@ -124,8 +125,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 0,
@@ -134,8 +135,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -144,8 +145,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -154,8 +155,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': None,
@@ -164,8 +165,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 'error',
@@ -174,8 +175,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 1,
@@ -184,8 +185,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 2,
@@ -194,8 +195,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -204,8 +205,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -214,8 +215,8 @@ def test_errors():
             'identify': 'both',
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -224,8 +225,8 @@ def test_errors():
             'identify': ['error'],
         },
         {
-            'equity': 'bbva',
-            'country': 'spain',
+            'stock': 'BBVA',
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -237,7 +238,7 @@ def test_errors():
 
     for param in params:
         try:
-            trendet.identify_trends(equity=param['equity'],
+            trendet.identify_trends(stock=param['stock'],
                                     country=param['country'],
                                     from_date=param['from_date'],
                                     to_date=param['to_date'],
@@ -249,7 +250,7 @@ def test_errors():
             pass
 
         try:
-            trendet.identify_all_trends(equity=param['equity'],
+            trendet.identify_all_trends(stock=param['stock'],
                                         country=param['country'],
                                         from_date=param['from_date'],
                                         to_date=param['to_date'],
@@ -258,12 +259,12 @@ def test_errors():
         except:
             pass
 
-    df = investpy.get_historical_data(equity='repsol',
-                                      country='spain',
-                                      from_date='01/01/2018',
-                                      to_date='01/01/2019')
+    df = get_stock_historical_data(stock='REP',
+                                   country='Spain',
+                                   from_date='01/01/2018',
+                                   to_date='01/01/2019')
 
-    df['str'] = 'error'
+    df['error'] = 'error'
 
     params = [
         {
@@ -298,7 +299,7 @@ def test_errors():
         },
         {
             'df': df,
-            'column': 'str',
+            'column': 'error',
             'window_size': 5,
             'identify': 'both'
         },

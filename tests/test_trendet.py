@@ -3,8 +3,9 @@
 
 import pytest
 
+from investpy import get_stock_historical_data, get_stocks_list
+
 import trendet
-import investpy
 
 
 def test_trendet():
@@ -12,21 +13,68 @@ def test_trendet():
     This function checks that main functions of trendet work properly.
     """
 
-    author = trendet.__author__
-    print(author)
-    version = trendet.__version__
-    print(version)
+    print(trendet.__author__)
+    print(trendet.__version__)
 
-    equities = investpy.get_equities(country='spain')
+    params = [
+        {
+            'stock': 'BBVA',
+            'country': 'Spain',
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 2,
+            'labels': ['A', 'B'],
+            'identify': 'both'
+        },
+        {
+            'stock': 'BBVA',
+            'country': 'Spain',
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 2,
+            'labels': None,
+            'identify': 'up',
+        },
+        {
+            'stock': 'BBVA',
+            'country': 'Spain',
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 2,
+            'labels': ['A', 'B'],
+            'identify': 'up',
+        },
+        {
+            'stock': 'BBVA',
+            'country': 'Spain',
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 2,
+            'labels': ['A', 'B'],
+            'identify': 'down',
+        },
+        {
+            'stock': 'BBVA',
+            'country': 'Spain',
+            'from_date': '01/01/2018',
+            'to_date': '01/01/2019',
+            'window_size': 5,
+            'trend_limit': 2,
+            'labels': None,
+            'identify': 'down',
+        }
+    ]
 
-    equities = equities['name'].tolist()
+    stocks = get_stocks_list(country='Spain')
 
-    params = list()
-
-    for equity in equities[:25]:
+    for stock in stocks[:25]:
         obj = {
-            'equity': equity,
-            'country': 'spain',
+            'stock': stock,
+            'country': 'Spain',
             'from_date': '01/01/2018',
             'to_date': '01/01/2019',
             'window_size': 5,
@@ -37,73 +85,8 @@ def test_trendet():
 
         params.append(obj)
 
-    obj = {
-        'equity': 'bbva',
-        'country': 'spain',
-        'from_date': '01/01/2018',
-        'to_date': '01/01/2019',
-        'window_size': 5,
-        'trend_limit': 2,
-        'labels': ['A', 'B'],
-        'identify': 'both'
-    }
-
-    params.append(obj)
-
-    obj = {
-        'equity': 'bbva',
-        'country': 'spain',
-        'from_date': '01/01/2018',
-        'to_date': '01/01/2019',
-        'window_size': 5,
-        'trend_limit': 2,
-        'labels': None,
-        'identify': 'up',
-    }
-
-    params.append(obj)
-
-    obj = {
-        'equity': 'bbva',
-        'country': 'spain',
-        'from_date': '01/01/2018',
-        'to_date': '01/01/2019',
-        'window_size': 5,
-        'trend_limit': 2,
-        'labels': ['A', 'B'],
-        'identify': 'up',
-    }
-
-    params.append(obj)
-
-    obj = {
-        'equity': 'bbva',
-        'country': 'spain',
-        'from_date': '01/01/2018',
-        'to_date': '01/01/2019',
-        'window_size': 5,
-        'trend_limit': 2,
-        'labels': None,
-        'identify': 'down',
-    }
-
-    params.append(obj)
-
-    obj = {
-        'equity': 'bbva',
-        'country': 'spain',
-        'from_date': '01/01/2018',
-        'to_date': '01/01/2019',
-        'window_size': 5,
-        'trend_limit': 2,
-        'labels': ['A', 'B'],
-        'identify': 'down',
-    }
-
-    params.append(obj)
-
     for param in params:
-        trendet.identify_trends(equity=param['equity'],
+        trendet.identify_trends(stock=param['stock'],
                                 country=param['country'],
                                 from_date=param['from_date'],
                                 to_date=param['to_date'],
@@ -112,33 +95,30 @@ def test_trendet():
                                 labels=param['labels'],
                                 identify=param['identify'])
 
-        trendet.identify_all_trends(equity=param['equity'],
+        trendet.identify_all_trends(stock=param['stock'],
                                     country=param['country'],
                                     from_date=param['from_date'],
                                     to_date=param['to_date'],
                                     window_size=param['window_size'],
                                     identify=param['identify'])
 
-    df = investpy.get_historical_data(equity='repsol',
-                                      country='spain',
-                                      from_date='01/01/2018',
-                                      to_date='01/01/2019')
+    df = get_stock_historical_data(stock='REP',
+                                   country='Spain',
+                                   from_date='01/01/2018',
+                                   to_date='01/01/2019')
 
     params = [
         {
-            'df': df,
             'column': 'Close',
             'window_size': 5,
             'identify': 'both'
         },
         {
-            'df': df,
             'column': 'Close',
             'window_size': 5,
             'identify': 'up'
         },
         {
-            'df': df,
             'column': 'Close',
             'window_size': 5,
             'identify': 'down'
@@ -146,7 +126,7 @@ def test_trendet():
     ]
 
     for param in params:
-        trendet.identify_df_trends(df=param['df'],
+        trendet.identify_df_trends(df=df,
                                    column=param['column'],
                                    window_size=param['window_size'],
                                    identify=param['identify'])

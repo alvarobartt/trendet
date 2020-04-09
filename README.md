@@ -1,4 +1,4 @@
-# trendet - is a Python package for trend detection on stock time series data
+# trendet - Trend detection on stock time series data
 
 [![Python Version](https://img.shields.io/pypi/pyversions/trendet.svg)](https://pypi.org/project/trendet/)
 [![PyPi Version](https://img.shields.io/pypi/v/trendet.svg)](https://pypi.org/project/trendet/)
@@ -10,14 +10,14 @@
 [![Downloads](https://img.shields.io/pypi/dm/trendet.svg?style=flat)](https://pypistats.org/packages/trendet)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/trendet.jpg"/>
+  <img src="https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/_static/trendet.jpg"/>
 </p>
 
 ## Introduction
 
 **trendet** is a Python package to detect trends on the market so to analyze its behaviour. So on, this package
 has been created to support [investpy](https://github.com/alvarobartt/investpy) features when it comes to data retrieval
-from different financial products such as stocks/equities, funds or ETFs; and it is intended to be combined with it, 
+from different financial products such as stocks, funds or ETFs; and it is intended to be combined with it, 
 but also with every `pandas.DataFrame`, formatted as OHLC.
 
 Anyways, **trendet** can also be used to identify trends from any `pandas.DataFrame` which contains any column with
@@ -32,7 +32,7 @@ In order to get this package working you will need to install it using pip by ty
 
 Or just install the current release or a specific release version such as:
 
-``$ python -m pip install trendet==0.5``
+``$ python -m pip install trendet==0.6``
 
 ## Usage
 
@@ -54,8 +54,8 @@ import seaborn as sns
 
 sns.set(style='darkgrid')
 
-df = trendet.identify_all_trends(equity='bbva',
-                                 country='spain',
+df = trendet.identify_all_trends(stock='BBVA',
+                                 country='Spain',
                                  from_date='01/01/2018',
                                  to_date='01/01/2019',
                                  window_size=5,
@@ -118,11 +118,10 @@ new issues if needed or navigate through them in order to solve them or contribu
 
 This package has been created so to identify market trends based on stock historical data retrieved via 
 [investpy](https://github.com/alvarobartt/investpy) so to determine which trends have been prevailing on the market
-based on a single stock/equity OHLC values.
+based on a single stock OHLC values.
 
 Conclude that this is the result of a research project, so this package has been developed with research purposes and
 no profit is intended.
 
 Plots have been generated with both [matplotlib](https://pypi.org/project/matplotlib/) and 
-[seaborn](https://pypi.org/project/seaborn/), using [@Dih5](https://github.com/Dih5) 
-[paper-themes](https://github.com/Dih5/paper-themes) for scientific publications highly recommended.
+[seaborn](https://pypi.org/project/seaborn/).
