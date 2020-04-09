@@ -3,10 +3,10 @@
 [![Python Version](https://img.shields.io/pypi/pyversions/trendet.svg)](https://pypi.org/project/trendet/)
 [![PyPi Version](https://img.shields.io/pypi/v/trendet.svg)](https://pypi.org/project/trendet/)
 [![Package Status](https://img.shields.io/pypi/status/trendet.svg)](https://pypi.org/project/trendet/)
-[![Build Status](https://dev.azure.com/alvarob96/alvarob96/_apis/build/status/alvarob96.trendet?branchName=master)](https://dev.azure.com/alvarob96/alvarob96/_build?definitionId=1&_a=summary)
-[![Build Status](https://img.shields.io/travis/alvarob96/trendet/master.svg?label=Travis%20CI&logo=travis&logoColor=white)](https://travis-ci.org/alvarob96/trendet)
+[![Build Status](https://dev.azure.com/alvarobartt/alvarobartt/_apis/build/status/alvarobartt.trendet?branchName=master)](https://dev.azure.com/alvarobartt/alvarobartt/_build?definitionId=1&_a=summary)
+[![Build Status](https://img.shields.io/travis/alvarobartt/trendet/master.svg?label=Travis%20CI&logo=travis&logoColor=white)](https://travis-ci.org/alvarobartt/trendet)
 [![Documentation Status](https://readthedocs.org/projects/trendet/badge/?version=latest)](https://trendet.readthedocs.io/)
-[![codecov](https://codecov.io/gh/alvarob96/trendet/branch/master/graph/badge.svg)](https://codecov.io/gh/alvarob96/trendet)
+[![codecov](https://codecov.io/gh/alvarobartt/trendet/branch/master/graph/badge.svg)](https://codecov.io/gh/alvarobartt/trendet)
 [![Downloads](https://img.shields.io/pypi/dm/trendet.svg?style=flat)](https://pypistats.org/packages/trendet)
 
 <p align="center">
