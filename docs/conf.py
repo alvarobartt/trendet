@@ -67,7 +67,7 @@ html_sidebars = {
 
 html_theme_options = {
     'description': 'A stock trend detector.',
-    'github_user': 'alvarob96',
+    'github_user': 'alvarobartt',
     'github_repo': 'trendet',
     'github_button': True,
     'github_type': 'star',

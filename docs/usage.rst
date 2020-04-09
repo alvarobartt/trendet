@@ -63,7 +63,7 @@ to Z by default.
 
 So on, the resulting plot which will be outputted from the previous block of code will look like:
 
-.. image:: https://raw.githubusercontent.com/alvarob96/trendet/master/docs/trendet_example.png
+.. image:: https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/trendet_example.png
     :align: center
 
 Identify All Trends of investpy DataFrame
@@ -125,7 +125,7 @@ Which as described before, plots all the trends identified on the specified stoc
 data removing overlapped trends keeping just the longer trend as minor trends are ignored. So the
 output of the previous block of code on **trendet** usage is the following plot:
 
-.. image:: https://raw.githubusercontent.com/alvarob96/trendet/master/docs/trendet_example_all.png
+.. image:: https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/trendet_example_all.png
     :align: center
 
 Identify Trends of Custom DataFrame
@@ -189,5 +189,5 @@ which are that the values can just be ``int64`` or ``float64`` and the specified
 
 Which outputs the following plot:
 
-.. image:: https://raw.githubusercontent.com/alvarob96/trendet/master/docs/trendet_example_df.png
+.. image:: https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/trendet_example_df.png
     :align: center

@@ -2,7 +2,7 @@ Disclaimer
 ==========
 
 This package has been created so to identify market trends based on stock historical data retrieved via
-`investpy <https://github.com/alvarob96/investpy>`_ so to determine which trends have been prevailing on the market
+`investpy <https://github.com/alvarobartt/investpy>`_ so to determine which trends have been prevailing on the market
 based on a single stock/equity OHLC values.
 
 Conclude that this is the result of a research project, so this package has been developed with research purposes and

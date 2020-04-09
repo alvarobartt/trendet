@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from setuptools import setup, find_packages
 import io
@@ -13,8 +12,8 @@ setup(
     name='trendet',
     version='0.5',
     packages=find_packages(),
-    url='https://github.com/alvarob96/trendet',
-    download_url='https://github.com/alvarob96/trendet/archive/0.5.tar.gz',
+    url='https://github.com/alvarobartt/trendet',
+    download_url='https://github.com/alvarobartt/trendet/archive/0.5.tar.gz',
     license='MIT License',
     author='Alvaro Bartolome',
     author_email='alvarob96@usal.es',
@@ -43,8 +42,8 @@ setup(
     keywords='trend detection, stock analysis, stock, trend analysis',
     python_requires='>=3',
     project_urls={
-        'Bug Reports': 'https://github.com/alvarob96/trendet/issues',
-        'Source': 'https://github.com/alvarob96/trendet',
+        'Bug Reports': 'https://github.com/alvarobartt/trendet/issues',
+        'Source': 'https://github.com/alvarobartt/trendet',
         'Documentation': 'https://trendet.readthedocs.io/'
     },
 )

@@ -1,9 +1,7 @@
-#!/usr/bin/env python
-
-# Copyright 2018-2019 Alvaro Bartolome
+# Copyright 2019-2020 Alvaro Bartolome
 # See LICENSE for details.
 
-__author__ = 'Alvaro Bartolome @ alvarob96 on GitHub'
+__author__ = 'Alvaro Bartolome @ alvarobartt on GitHub'
 __version__ = '0.5'
 
 from investpy import get_historical_data, get_equity_countries

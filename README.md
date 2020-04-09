@@ -10,13 +10,13 @@
 [![Downloads](https://img.shields.io/pypi/dm/trendet.svg?style=flat)](https://pypistats.org/packages/trendet)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/alvarob96/trendet/master/docs/trendet.jpg"/>
+  <img src="https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/trendet.jpg"/>
 </p>
 
 ## Introduction
 
 **trendet** is a Python package to detect trends on the market so to analyze its behaviour. So on, this package
-has been created to support [investpy](https://github.com/alvarob96/investpy) features when it comes to data retrieval
+has been created to support [investpy](https://github.com/alvarobartt/investpy) features when it comes to data retrieval
 from different financial products such as stocks/equities, funds or ETFs; and it is intended to be combined with it, 
 but also with every `pandas.DataFrame`, formatted as OHLC.
 
@@ -103,7 +103,7 @@ plt.show()
 ````
 
 Further usage insights can be found on the [docs](https://trendet.readthedocs.io/) or on the following 
-[gist](https://gist.github.com/alvarob96/98f94dcfec59f78a16ad2edbf464ce75#file-identify_all_trends-py). Anyways, 
+[gist](https://gist.github.com/alvarobartt/98f94dcfec59f78a16ad2edbf464ce75#file-identify_all_trends-py). Anyways, 
 feel free to create your own scripts on how you use **trendet** or how can it be used in order to improve its features.
 
 ## Contribute
@@ -111,13 +111,13 @@ feel free to create your own scripts on how you use **trendet** or how can it be
 As this is an open source project it is open to contributions, bug reports, bug fixes, documentation improvements, 
 enhancements and ideas.
 
-Also there is an open tab of [issues](https://github.com/alvarob96/trendet/issues) where anyone can contribute opening 
+Also there is an open tab of [issues](https://github.com/alvarobartt/trendet/issues) where anyone can contribute opening 
 new issues if needed or navigate through them in order to solve them or contribute to its solving.
 
 ## Disclaimer
 
 This package has been created so to identify market trends based on stock historical data retrieved via 
-[investpy](https://github.com/alvarob96/investpy) so to determine which trends have been prevailing on the market
+[investpy](https://github.com/alvarobartt/investpy) so to determine which trends have been prevailing on the market
 based on a single stock/equity OHLC values.
 
 Conclude that this is the result of a research project, so this package has been developed with research purposes and

@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-
-# Copyright 2018-2019 Alvaro Bartolome
+# Copyright 2019-2020 Alvaro Bartolome
 # See LICENSE for details.
 
 import pytest

@@ -6,7 +6,7 @@
 Welcome to trendet's documentation!
 ===================================
 
-.. image:: https://raw.githubusercontent.com/alvarob96/trendet/master/docs/trendet.jpg
+.. image:: https://raw.githubusercontent.com/alvarobartt/trendet/master/docs/trendet.jpg
     :align: center
 
 .. toctree::
