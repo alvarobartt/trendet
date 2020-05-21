@@ -70,7 +70,7 @@ Identify All Trends of investpy DataFrame
 -----------------------------------------
 
 Additionally **trendet** allows the user to identify/detect all the up and down trends on the market
-via the function ``identify_all_trends`` which has been included in 0.6 release. So on, the sample code for
+via the function ``identify_all_trends`` which has been included in 0.7 release. So on, the sample code for
 its usage is as follows:
 
 .. code-block:: python

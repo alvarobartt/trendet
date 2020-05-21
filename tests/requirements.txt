@@ -1,0 +1,4 @@
+pytest
+codecov
+pytest-codecov
+investpy>=0.9.14

@@ -27,7 +27,7 @@ copyright = '2019-2020, Alvaro Bartolome del Canto'
 author = 'Alvaro Bartolome del Canto'
 
 # The full version, including alpha/beta/rc tags
-release = '0.6'
+release = '0.7'
 
 
 # -- General configuration ---------------------------------------------------

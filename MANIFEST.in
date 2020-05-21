@@ -1,1 +1,4 @@
 include README.md
+include requirements.txt
+include docs/requirements.txt
+include tests/requirements.txt
