@@ -523,12 +523,12 @@ def identify_df_trends(df, column, window_size=5, identify='both'):
 
     up_trend = {
         'name': 'Up Trend',
-        'element': np.negative(df['Close'])
+        'element': np.negative(df[column])
     }
 
     down_trend = {
         'name': 'Down Trend',
-        'element': df['Close']
+        'element': df[column]
     }
 
     if identify == 'both':
