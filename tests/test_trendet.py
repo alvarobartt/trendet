@@ -1,5 +1,6 @@
 # Copyright 2019-2020 Alvaro Bartolome
 # See LICENSE for details.
+import time
 
 import pytest
 
@@ -94,6 +95,8 @@ def test_trendet():
                                 trend_limit=param['trend_limit'],
                                 labels=param['labels'],
                                 identify=param['identify'])
+        # sleep for 5 seconds to avoid http code 429 error
+        time.sleep(5)
 
         trendet.identify_all_trends(stock=param['stock'],
                                     country=param['country'],
@@ -130,6 +133,8 @@ def test_trendet():
                                    column=param['column'],
                                    window_size=param['window_size'],
                                    identify=param['identify'])
+        # sleep for 5 seconds to avoid http code 429 error
+        time.sleep(5)
 
 
 if __name__ == '__main__':
