@@ -361,11 +361,10 @@ def identify_all_trends(stock, country, from_date, to_date, window_size=5, ident
 
         trends = list()
 
+        df_length = len(obj['element'])
+
         for index, value in enumerate(obj['element'], 0):
-            if limit and limit > value:
-                values.append(value)
-                limit = mean(values)
-            elif limit and limit < value:
+            if limit and limit < value or index == df_length - 1:
                 if len(values) > window_size:
                     min_value = min(values)
 
@@ -384,6 +383,9 @@ def identify_all_trends(stock, country, from_date, to_date, window_size=5, ident
 
                 limit = None
                 values = list()
+            elif limit and limit > value:
+                values.append(value)
+                limit = mean(values)
             else:
                 from_trend = index
 
@@ -547,11 +549,10 @@ def identify_df_trends(df, column, window_size=5, identify='both'):
 
         trends = list()
 
+        df_length = len(obj['element'])
+
         for index, value in enumerate(obj['element'], 0):
-            if limit and limit > value:
-                values.append(value)
-                limit = mean(values)
-            elif limit and limit < value:
+            if limit and limit < value or index == df_length -1:
                 if len(values) > window_size:
                     min_value = min(values)
 
@@ -570,6 +571,9 @@ def identify_df_trends(df, column, window_size=5, identify='both'):
 
                 limit = None
                 values = list()
+            elif limit and limit > value:
+                values.append(value)
+                limit = mean(values)
             else:
                 from_trend = index
 
