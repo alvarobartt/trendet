@@ -178,7 +178,7 @@ def identify_trends(stock, country, from_date, to_date, window_size=5, trend_lim
 
             for down in results['Down Trend']:
                 if down['from'] < up['from'] < down['to'] or down['from'] < up['to'] < down['to']:
-                    if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
+                    if (up['to'] - up['from'])  > (down['to'] - down['from']) :
                         flag = True
                     else:
                         flag = False
@@ -204,7 +204,7 @@ def identify_trends(stock, country, from_date, to_date, window_size=5, trend_lim
 
             for up in results['Up Trend']:
                 if up['from'] < down['from'] < up['to'] or up['from'] < down['to'] < up['to']:
-                    if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
+                    if (up['to'] - up['from'])  < (down['to'] - down['from']) :
                         flag = True
                     else:
                         flag = False
@@ -400,7 +400,7 @@ def identify_all_trends(stock, country, from_date, to_date, window_size=5, ident
 
             for down in results['Down Trend']:
                 if down['from'] < up['from'] < down['to'] or down['from'] < up['to'] < down['to']:
-                    if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
+                    if (up['to'] - up['from'])  > (down['to'] - down['from']) :
                         flag = True
                     else:
                         flag = False
@@ -423,7 +423,7 @@ def identify_all_trends(stock, country, from_date, to_date, window_size=5, ident
 
             for up in results['Up Trend']:
                 if up['from'] < down['from'] < up['to'] or up['from'] < down['to'] < up['to']:
-                    if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
+                    if (up['to'] - up['from'])  < (down['to'] - down['from']) :
                         flag = True
                     else:
                         flag = False
@@ -505,7 +505,7 @@ def identify_df_trends(df, column, window_size=5, identify='both'):
         else:
             if df[column].dtype not in ['int64', 'float64']:
                 raise ValueError("supported values are just `int` or `float`, and the specified column of the "
-                                 "introduced `pandas.DataFrame` is " + str(df[column].dtype))
+                                "introduced `pandas.DataFrame` is " + str(df[column].dtype))
 
     if not isinstance(window_size, int):
         raise ValueError('window_size must be an `int`')
@@ -585,8 +585,8 @@ def identify_df_trends(df, column, window_size=5, identify='both'):
             flag = True
 
             for down in results['Down Trend']:
-                if down['from'] < up['from'] < down['to'] or down['from'] < up['to'] < down['to']:
-                    if (up['to'] - up['from']).days > (down['to'] - down['from']).days:
+                if down['from'] < up['from'] < down['to'] or down['from'] < up['to'] < down['to']:                                    
+                    if (up['to'] - up['from']) > (down['to'] - down['from']):
                         flag = True
                     else:
                         flag = False
@@ -599,7 +599,7 @@ def identify_df_trends(df, column, window_size=5, identify='both'):
         labels = [letter for letter in string.ascii_uppercase[:len(up_trends)]]
 
         for up_trend, label in zip(up_trends, labels):
-            for index, row in df[up_trend['from']:up_trend['to']].iterrows():
+            for index, row in df.loc[up_trend['from']:up_trend['to']].iterrows():
                 df.loc[index, 'Up Trend'] = label
 
         down_trends = list()
@@ -609,7 +609,7 @@ def identify_df_trends(df, column, window_size=5, identify='both'):
 
             for up in results['Up Trend']:
                 if up['from'] < down['from'] < up['to'] or up['from'] < down['to'] < up['to']:
-                    if (up['to'] - up['from']).days < (down['to'] - down['from']).days:
+                    if (up['to'] - up['from']) < (down['to'] - down['from']):
                         flag = True
                     else:
                         flag = False
@@ -622,7 +622,7 @@ def identify_df_trends(df, column, window_size=5, identify='both'):
         labels = [letter for letter in string.ascii_uppercase[:len(down_trends)]]
 
         for down_trend, label in zip(down_trends, labels):
-            for index, row in df[down_trend['from']:down_trend['to']].iterrows():
+            for index, row in df.loc[down_trend['from']:down_trend['to']].iterrows():
                 df.loc[index, 'Down Trend'] = label
 
         return df
@@ -632,7 +632,7 @@ def identify_df_trends(df, column, window_size=5, identify='both'):
         up_labels = [letter for letter in string.ascii_uppercase[:len(up_trends)]]
 
         for up_trend, up_label in zip(up_trends, up_labels):
-            for index, row in df[up_trend['from']:up_trend['to']].iterrows():
+            for index, row in df.loc[up_trend['from']:up_trend['to']].iterrows():
                 df.loc[index, 'Up Trend'] = up_label
 
         return df
@@ -642,7 +642,7 @@ def identify_df_trends(df, column, window_size=5, identify='both'):
         down_labels = [letter for letter in string.ascii_uppercase[:len(down_trends)]]
 
         for down_trend, down_label in zip(down_trends, down_labels):
-            for index, row in df[down_trend['from']:down_trend['to']].iterrows():
+            for index, row in df.loc[down_trend['from']:down_trend['to']].iterrows():
                 df.loc[index, 'Down Trend'] = down_label
 
         return df
